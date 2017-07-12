@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta  name="description" content="A find User Todo page">
+    <title>Login </title>
+    <!-- Font family-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!--link rel="stylesheet" href="/public/findUser.css" type="text/css"-->
+<style>
+
+    .login{
+        position: relative;
+        left:120px;
+    }
+    input{
+        position: relative;
+        left:30px;
+    }
+    .status{
+        position: relative;
+        left:40px;
+        color:red;
+        font-size: 20px;
+    }
+    h3{
+        position: relative;
+        left:40px;
+    }
+    .forgotpasswrd{
+        border:none;
+        position:relative;
+        left:400px;
+        font-size: 15px;
+        color:blue;
+        font-family: "Comic Sans MS";
+    }
+    .signup{
+        border:none;
+        font-size: 15px;
+        color:blue;
+        font-family: "Comic Sans MS";
+    }
+</style>
+</head>
+<body>
+<!-- SignIn form-->
+<section  class="welcome">
+    <div class="container">
+
+            <div class="row centered col-md-4 col-md-offset-4">
+                    <h3> Welcome to TODO app </h3><br><br>
+
+            </div>
+    </div>
+</section>
+<section  class="find-form">
+    <div class="container">
+           <div class="row centered">
+               <form class="form-horizondal"  method="POST" action="login">
+                <div class=" col-md-4 col-md-offset-4">
+
+                            <label class="status"><%= status %></label><br><br><br>
+                            <label for="user-id" class="col-md-2">Username</label>
+                            <div class="col-md-8">
+                                <input type="text" id="user-id" name="username" class="form-control" >
+                            </div><br><br><br>
+
+                            <label for="pwd" class="col-md-2">Password</label>
+                            <div class="col-md-8">
+                                <input type="password" id="pwd" name="password" class="form-control" >
+                            </div>
+                            <br> <br> <br>
+                            <button type="submit" class="btn btn-submit form-submit login btn-default"> LOGIN</button><br><br>
+                </div>
+               </form>
+           </div>
+            <form method="post" action="/forgotpassword">
+                <div class=" col-md-6 ">
+                    <button type="submit" class="btn btn-submit form-submit forgotpasswrd btn-default"> Forgot Password</button>
+                </div>
+            </form>
+        <form method="POST" action="/signup">
+            <div class=" col-md-6 ">
+                <button type="submit" class="btn btn-submit form-submit signup btn-default"> Sign-up</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Bootstrap Jquery -->
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>

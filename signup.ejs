@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta  name="description" content="A find User Todo page">
+    <title>Sign Up</title>
+    <!-- bootstrap css -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <style>
+            .secAns{
+                width:400px;
+                height:30px;
+            }
+        .status{
+            color:red;
+            font-family: "Comic Sans MS";
+            font-style: italic;
+
+        }
+
+    </style>
+
+</head>
+<body>
+<!-- SignIn form-->
+<section  class="sign-up">
+    <div class="container">
+
+        <div class="row centered col-md-4 col-md-offset-4">
+            <h3>SIGN UP</h3><br><br>
+
+        </div>
+    </div>
+</section>
+<section  class="sign-up-form">
+    <div class="container">
+        <div class="row centered">
+            <form class="form-horizondal" method="post" action="/createNewUSer">
+                <label class="col-md-12 status"><%= createNewUserStatus %></label><br>
+                <div class=" col-md-8 ">
+                    <label for="user-id" class="col-md-2">Username</label>
+                    <div class="col-md-4">
+                        <input type="text" id="user-id" name="username" class="form-control" required>
+                    </div><br><br><br>
+                    <label for="pwd" class="col-md-2">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" id="pwd" name="password" class="form-control" required>
+                    </div><br><br><br>
+                    <h4> SECURITY QUESTIONS</h4>
+                    <% var secQuestionsPg = SecQuestions %>
+                    <% cnt =1%>
+                    <% secQuestionsPg.forEach(function(question){ %>
+                        <label for= <%= "secQues" + cnt %> class="col-md-12"> <%= question%> </label><br>
+                        <input name="Security_Questions" value="<%= question %>" hidden readonly>
+                        <div class="col-md-12">
+                                <input type="text" class="secAns" name="secAns" class="form-control" required ><br><br>
+                        </div>
+                    <% }) %>
+                    <button type="submit" class="btn btn-submit form-submit login btn-default"> SIGN UP</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap Jquery -->
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>

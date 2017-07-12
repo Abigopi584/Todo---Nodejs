@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta  name="description" content="A find User Todo page">
+    <title> User ToDo List </title>
+    <!-- Font family-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- bootstrap css -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="/public/findUser.css" type="text/css">-->
+    <script src="https://use.fontawesome.com/fd294065c1.js"></script>
+    <style>
+        .todo-welcome h3{
+            font-size:33px;
+            font-family:"Comic Sans MS";
+            text-align:center;
+            color:green;
+        }
+        .userdisplay {
+            float:left;
+        }
+        .just{
+            display:none;
+            width:20px;
+        }
+        .todolist{
+            position:relative;
+            left:350px;
+        }
+
+    .todoitems {
+        position: relative;
+        left: 30px;
+        font-family: "Comic Sans MS";
+        color: purple;
+        font-size: 20px;
+        text-decoration: none   ;
+    }
+        .btn-update{
+            float:left;
+            position:relative;
+            right:70px;
+        }
+        .btn-remove{
+            float:left;
+            position:relative;
+            left:-500px;
+        }
+        .createNewTodo{
+            text-align:center;
+            display:inline;
+
+
+        }
+        .createNewtodo{
+            width:300px;!important;
+        }
+        .btn-fulltodo{
+            border: none;
+            color:blue;
+            font-weight: 700;
+            font-size:20px;
+            background: transparent;
+        }
+        .btn-fulltodo:hover{
+            background: transparent;
+            color:darkolivegreen;
+        }
+        .logout{
+            border: none;
+            color:lightgray;
+            font-weight: 700;
+            font-size:15px;
+        }
+        .logout:hover{
+            background: transparent;
+            color:darkolivegreen;
+        }
+    </style>
+    <script>
+        function btnUpdate(element){
+            var updateBtnId =element.getAttribute('id');
+            var labelId =  document.getElementById(updateBtnId);
+
+            if (window.getComputedStyle(labelId,null).getPropertyValue("text-decoration-line") == "none") {
+                labelId.style.textDecoration= "line-through";
+                labelId.style.color ="blue"
+            }
+            else{
+                labelId.style.textDecoration ="none";
+                labelId.style.color = "purple"
+            }
+        }
+/*
+
+        $(document).ready(function(){
+            $('#createNew').click(function(){
+                var div =document.getElementById('')
+                var  data ={
+                    createNewtodo:$('#createnew').val(),
+                    req_username:$('#username').val()
+                }
+                alert(JSON.stringify(data));
+
+                $.ajax({
+                    url:'/createNew',
+                    type:"POST",
+                    datatype:'json',
+                    data:JSON.stringify(data),
+                    contentType:"application/json",
+                    success: function(data){
+                        alert(JSON.stringify(data));
+                        if(data.status === 200){
+                            console.log("Todo Updated");
+                            var newtodoLbl = document.createElement('label');
+                            newtodoLbl.setAttribute('id',createNewtodo);
+                            newtodoLbl.setAttribute('class','todoitems');
+                            newtodoLbl.setAttribute('class','col-md-3');
+                            newtodoLbl.setAttribute('class','col-md-offset-1');
+                            newtodoLbl.innerHTML = createNewtodo;
+
+                            div.appendChild(newtodoLbl);
+                            /!* $('#todos').append("<label id=" + createNewtodo + " class='todoitems col-md-3 col-md-offset-1' "> + createNewtodo + " </label>")*!/
+                        }
+
+                    },
+                    error:function(){
+                        alert('process failed');
+                    }
+
+                })
+
+            })
+        })
+*/
+        function clr(){
+            var createNewStatusid = document.getElementById('createNewStatus');
+            if (createNewStatusid.innerHTML!== ' '){
+                createNewStatusid.innerHTML =  '';
+                alert(createNewStatusid.innerHTML);
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+        <section class ="User-To-Do">
+            <div class="row">
+                <div class="todo-welcome col-md-12">
+                    <h3> To-Do for <%= username %> </h3><br><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="createNewTodo  ">
+                    <label id="createNewStatus" class="createNewStatus"><%= createNewStatus %></label>
+                    <!--<form method="post" action="createNew" class="form-inline col-md-3">-->
+                    <form method="POST" class="form-inline col-md-3" action="createNew">
+                        <input type="text" id="createnew" name="createNewtodo" class=" form-control createNewtodo" placeholder="Create New Todo Here" required>
+                        <button type="submit" onclick=clr() id="createNew" class="btn btn-default btn-submit">&#10010</button>
+                        <input name="req_username" id="username" value="<%=username %>" hidden readonly>
+                    </form>
+                    <form method="post" action="getFullTodo" class="form-inline col-md-3">
+                        <input name="req_username" value="<%=username %>" hidden readonly>
+                        <button type="submit" class="btn btn-default btn-fulltodo btn-submit"><%= getFullTodoList %></button>
+                    </form>
+                    <form method="post" action="SearchToDo" class="form-inline col-md-3">
+                        <input type="search" id="serachToDo" name="searchtodo" class=" form-control searchtodo" placeholder="search" required>
+                        <button type="submit" class="btn btn-default btn-submit"><i class="fa fa-search" aria-hidden="true"></i>     </button>
+                        <input name="search_username" value="<%=username %>" hidden readonly>
+                    </form>
+                    <form method="post" action="Logout" class="form-inline col-md-3">
+                        <button type="submit" class="btn btn-default btn-submit logout">LOGOUT</button>
+                    </form>
+                </div>
+            </div><br> <br>
+            <div class = "row">
+                <div  class="main-content centered todolist">
+                    <% var todoitemarr = todoitems %>
+
+                    <% todoitemarr.forEach(function(todo){ %>
+                        <div id="todos" class="todos">
+                            <label id="<%= todo %>" class="todoitems col-md-3 col-md-offset-1"> <%= todo %> </label>
+                            <div class="col-md-4">
+                                <button type="submit" id="<%= todo %>" onclick="btnUpdate(this)" class=" btn btn-submit form-submit btn-default btn_update">&#10004</button>
+                            </div>
+
+                            <form method="post" action="deleteTodo">
+                                <div class="col-md-4 btn-remove ">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-submit form-submit btn-default ">&#10008</button>
+                                    </div>
+                                </div>
+                                <input type="text"  name="req_todo" class="form-control just" value="<%= todo %>">
+                                <input type="text" name="req_username" class="form-control just" value="<%= username %>">
+                            </form>
+                        </div>
+
+                    <% })%>
+                </div>
+            </div>
+
+
+        </section>
+<!-- Bootstrap Jquery -->
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
